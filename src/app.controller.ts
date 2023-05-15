@@ -1,6 +1,14 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { TranscodeProducerService } from './transcode.producer.service';
+import { CreateDto } from './dto_job/create.dto';
 
 @Controller('api')
 export class AppController {
@@ -13,10 +21,10 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+  @UsePipes(new ValidationPipe({}))
   @Post('transcode')
-  async transcode(@Body() fileName: string) {
+  async transcode(@Body() dto: CreateDto) {
     console.log('POST');
-    return this.transcodeProducerService.transcode_test({ fileName: fileName});
-    // return await this.appService.transcode();
+    return this.transcodeProducerService.transcode_test(dto);
   }
 }
