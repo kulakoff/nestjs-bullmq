@@ -5,6 +5,7 @@ import { BullModule } from '@nestjs/bull';
 import { TRANSCODE_QUEUE } from './constants';
 import { TranscodeConsumer } from './transcode.consumer.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TranscodeProducerService } from './transcode.producer.service';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -23,6 +24,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, TranscodeConsumer],
+  providers: [AppService, TranscodeConsumer, TranscodeProducerService],
 })
 export class AppModule {}

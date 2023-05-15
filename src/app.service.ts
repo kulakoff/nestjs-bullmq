@@ -12,7 +12,7 @@ export class AppService {
     return 'Hello World!';
   }
   async transcode() {
-    await this.transcodeQueue.add({
+    return await this.transcodeQueue.add({
       fileName: 'sound.mp3',
     });
   }
